@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cv-Generator-Server</name>
+    </assembly>
+    <members>
+        <member name="M:Cv_Generator_Server.Controllers.WeatherForecastController.Get">
+            <summary>
+            Retorna un listado de climas
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
