@@ -23,6 +23,10 @@ namespace Cv_Generator_Server.Controllers
             _logger = logger;
         }
 
+     /// <summary>
+     /// Retorna un listado de climas
+     /// </summary>
+     /// <returns></returns>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
