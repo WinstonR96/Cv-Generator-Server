@@ -1,0 +1,60 @@
+﻿using Cv_Generator_Server.Controllers;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Cv_Generator_Server.Services
+{
+    public  class AuthService
+    {
+
+        public static  User Authenticate(LoginRequest data)
+        {
+            if (data.email.Equals("wijurost@gmail.com"))
+            {
+                return new User
+                {
+                    Name = "Winston",
+                    Email = "wijurost@gmail.com",
+                    UserId = "a79b2e64-a4de-4f3a-8cf6-a68ba400db24"
+                };
+            }
+
+            return null;
+        }
+
+        public static string GenerateToken(User user, string secretKey)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            // Creamos los claims (pertenencias, características) del usuario
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Name),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())              
+            };
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                // Nuestro token va a durar un día
+                Expires = DateTime.UtcNow.AddDays(1),
+                // Credenciales para generar el token usando nuestro secretykey y el algoritmo hash 256
+                SigningCredentials = credentials
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var createdToken = tokenHandler.CreateToken(tokenDescriptor);
+            var encodeToken = tokenHandler.WriteToken(createdToken);
+
+            return encodeToken;
+        }
+    }
+}
