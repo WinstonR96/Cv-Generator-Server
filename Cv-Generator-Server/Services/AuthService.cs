@@ -1,5 +1,8 @@
 ﻿using Cv_Generator_Server.Controllers;
+using Cv_Generator_Server.Helpers;
+using Cv_Generator_Server.Interfaces;
 using Cv_Generator_Server.Models;
+using Cv_Generator_Server.Models.DTOs;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -12,25 +15,29 @@ using System.Threading.Tasks;
 
 namespace Cv_Generator_Server.Services
 {
-    public  class AuthService
+    public class AuthService : IAuthService
     {
 
-        public static User Authenticate(LoginRequest data)
-        {
-            if (data.email.Equals("wijurost@gmail.com"))
-            {
-                return new User
-                {
-                    Username = "Winston",
-                    Email = "wijurost@gmail.com",
-                    UserId = 1
-                };
-            }
+        private readonly ApplicationDbContext _context;
 
-            return null;
+        public AuthService(ApplicationDbContext context)
+        {
+            _context = context;
         }
 
-        public static string GenerateToken(User user, string secretKey)
+
+        public User Authenticate(LoginDTO data)
+        {
+            var user = _context.users.Single(x => x.Email == data.email);
+            if (user == null)
+                throw new Exception("Usuario no existe");
+            if (user.Password != Utils.GetSHA256(data.password))
+                throw new Exception("Contraseña Erronea");
+            return user;
+        }
+
+
+        public string GenerateToken(User user, string secretKey)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -39,7 +46,7 @@ namespace Cv_Generator_Server.Services
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Username),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())          
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -57,5 +64,18 @@ namespace Cv_Generator_Server.Services
 
             return encodeToken;
         }
+
+        public void ChangePassword(UserPassDTO data)
+        {
+            var userOriginal = _context.users.Single(x => x.UserId == data.UserId);
+            userOriginal.Password = Utils.GetSHA256(data.Password);
+            if (userOriginal == null)
+                throw new Exception("Usuario no encontrado");
+            
+            _context.Update(userOriginal);
+            _context.SaveChanges();
+                
+        }
+
     }
 }

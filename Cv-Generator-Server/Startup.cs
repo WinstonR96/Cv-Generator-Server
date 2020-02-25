@@ -1,4 +1,6 @@
 using Cv_Generator_Server.Helpers;
+using Cv_Generator_Server.Interfaces;
+using Cv_Generator_Server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -72,6 +74,9 @@ namespace Cv_Generator_Server
                     });
                 c.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "api.xml"));
             });
+
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAuthService, AuthService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
