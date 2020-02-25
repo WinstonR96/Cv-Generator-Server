@@ -1,4 +1,5 @@
 ﻿using Cv_Generator_Server.Controllers;
+using Cv_Generator_Server.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -14,15 +15,15 @@ namespace Cv_Generator_Server.Services
     public  class AuthService
     {
 
-        public static  User Authenticate(LoginRequest data)
+        public static User Authenticate(LoginRequest data)
         {
             if (data.email.Equals("wijurost@gmail.com"))
             {
                 return new User
                 {
-                    Name = "Winston",
+                    Username = "Winston",
                     Email = "wijurost@gmail.com",
-                    UserId = "a79b2e64-a4de-4f3a-8cf6-a68ba400db24"
+                    UserId = 1
                 };
             }
 
@@ -36,9 +37,9 @@ namespace Cv_Generator_Server.Services
             // Creamos los claims (pertenencias, características) del usuario
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Name),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Username),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())              
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())          
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor
