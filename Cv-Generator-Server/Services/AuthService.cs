@@ -15,18 +15,29 @@ using System.Threading.Tasks;
 
 namespace Cv_Generator_Server.Services
 {
+    /// <summary>
+    /// Servicio para resolver request relacionados a la autenticacion
+    /// </summary>
     public class AuthService : IAuthService
     {
 
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="context">DbContext</param>
         public AuthService(ApplicationDbContext context)
         {
             _context = context;
         }
 
-
-        public User Authenticate(LoginDTO data)
+        /// <summary>
+        /// Metodo para realizar la autenticacion del usuario
+        /// </summary>
+        /// <param name="data">Datos para hacer el login [email][password]</param>
+        /// <returns>retorna el usuario y token jwt, sino el mensaje de error</returns>
+        public User Authenticate(LoginRequestDTO data)
         {
             var user = _context.users.Single(x => x.Email == data.email);
             if (user == null)
@@ -36,7 +47,12 @@ namespace Cv_Generator_Server.Services
             return user;
         }
 
-
+        /// <summary>
+        /// Permite generar el token JWT
+        /// </summary>
+        /// <param name="user">Usuario que intenta loguear</param>
+        /// <param name="secretKey">Clave secreta</param>
+        /// <returns>retorna el token JWT</returns>
         public string GenerateToken(User user, string secretKey)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
@@ -60,11 +76,13 @@ namespace Cv_Generator_Server.Services
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var createdToken = tokenHandler.CreateToken(tokenDescriptor);
-            var encodeToken = tokenHandler.WriteToken(createdToken);
-
-            return encodeToken;
+            return tokenHandler.WriteToken(createdToken);
         }
 
+        /// <summary>
+        /// Permite cambiar la contraseña del usuario logueado
+        /// </summary>
+        /// <param name="data">datos para cambiar la contraseña[UserId][Password]</param>
         public void ChangePassword(UserPassDTO data)
         {
             var userOriginal = _context.users.Single(x => x.UserId == data.UserId);

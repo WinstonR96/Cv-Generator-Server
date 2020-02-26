@@ -2,17 +2,18 @@
 using Cv_Generator_Server.Interfaces;
 using Cv_Generator_Server.Models;
 using Cv_Generator_Server.Models.DTOs;
-using Cv_Generator_Server.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cv_Generator_Server.Controllers
 {
+    /// <summary>
+    /// Controlador del modelo User
+    /// </summary>
     [Route("api/v1/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -21,6 +22,13 @@ namespace Cv_Generator_Server.Controllers
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
 
+
+        /// <summary>
+        /// Constructor con inyeccion de dependencias
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="configuration"></param>
+        /// <param name="userService"></param>
         public UserController(ILogger<UserController> logger, IConfiguration configuration, IUserService userService)
         {
             _logger = logger;
@@ -28,6 +36,10 @@ namespace Cv_Generator_Server.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// Obtener todos los usuarios
+        /// </summary>
+        /// <returns>retorna un listado de usuarios</returns>
         [HttpGet]
         public ActionResult<List<User>> GetUsers()
         {
@@ -35,6 +47,11 @@ namespace Cv_Generator_Server.Controllers
             return user;
         }
         
+        /// <summary>
+        /// Obtener un usuario por id
+        /// </summary>
+        /// <param name="id">Id del usuario a obtener</param>
+        /// <returns>Retorna un usuario por el id especificado</returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
@@ -45,6 +62,11 @@ namespace Cv_Generator_Server.Controllers
             
         }
 
+        /// <summary>
+        /// Agregar nuevo usuario
+        /// </summary>
+        /// <param name="data">Informacion del nuevo usuario</param>
+        /// <returns>Si es exitoso retorna el nuevo usuario, sino retorna el error</returns>
         [HttpPost]
         public IActionResult Add([FromBody] User data)
         {
@@ -62,6 +84,11 @@ namespace Cv_Generator_Server.Controllers
             }
         }
 
+        /// <summary>
+        /// Actualizar un usuario, por el momento solo se puede actualizar la foto
+        /// </summary>
+        /// <param name="data">Datos del usuario a modificar [UserId] y [Photo]</param>
+        /// <returns>Retorna el usuario actualoizado sino retorna el error</returns>
         [HttpPut]
         public IActionResult Update([FromBody] UserPhotoDTO data)
         {

@@ -4,11 +4,750 @@
         <name>Cv-Generator-Server</name>
     </assembly>
     <members>
-        <member name="M:Cv_Generator_Server.Controllers.WeatherForecastController.Get">
+        <member name="T:Cv_Generator_Server.Controllers.AuthController">
             <summary>
-            Retorna un listado de climas
+            Controlador que permite gestionar la sesion del usuario
             </summary>
-            <returns></returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.AuthController.#ctor(Microsoft.Extensions.Logging.ILogger{Cv_Generator_Server.Controllers.AuthController},Microsoft.Extensions.Configuration.IConfiguration,Cv_Generator_Server.Interfaces.IAuthService)">
+            <summary>
+            constructor con la inyeccion de dependencia de los servicios necesarios
+            </summary>
+            <param name="logger"></param>
+            <param name="configuration"></param>
+            <param name="authService"></param>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.AuthController.Login(Cv_Generator_Server.Models.DTOs.LoginRequestDTO)">
+            <summary>
+            Metodo para realizar login y generar token
+            </summary>
+            <param name="data">Informacion para solicitar el login [email] [password]</param>
+            <returns>Retorna datos del usuario asi como el token JWT</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.AuthController.ChangePassword(Cv_Generator_Server.Models.DTOs.UserPassDTO)">
+            <summary>
+            Permite cambiar la contraseña del usuario logueado
+            </summary>
+            <param name="data">Informacion para cambiar la contraseña[UserId] [Password]</param>
+            <returns>retorna mensaje de exito o mensaje de error</returns>
+        </member>
+        <member name="T:Cv_Generator_Server.Controllers.UserController">
+            <summary>
+            Controlador del modelo User
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.UserController.#ctor(Microsoft.Extensions.Logging.ILogger{Cv_Generator_Server.Controllers.UserController},Microsoft.Extensions.Configuration.IConfiguration,Cv_Generator_Server.Interfaces.IUserService)">
+            <summary>
+            Constructor con inyeccion de dependencias
+            </summary>
+            <param name="logger"></param>
+            <param name="configuration"></param>
+            <param name="userService"></param>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.UserController.GetUsers">
+            <summary>
+            Obtener todos los usuarios
+            </summary>
+            <returns>retorna un listado de usuarios</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.UserController.GetUser(System.Int32)">
+            <summary>
+            Obtener un usuario por id
+            </summary>
+            <param name="id">Id del usuario a obtener</param>
+            <returns>Retorna un usuario por el id especificado</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.UserController.Add(Cv_Generator_Server.Models.User)">
+            <summary>
+            Agregar nuevo usuario
+            </summary>
+            <param name="data">Informacion del nuevo usuario</param>
+            <returns>Si es exitoso retorna el nuevo usuario, sino retorna el error</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.UserController.Update(Cv_Generator_Server.Models.DTOs.UserPhotoDTO)">
+            <summary>
+            Actualizar un usuario, por el momento solo se puede actualizar la foto
+            </summary>
+            <param name="data">Datos del usuario a modificar [UserId] y [Photo]</param>
+            <returns>Retorna el usuario actualoizado sino retorna el error</returns>
+        </member>
+        <member name="T:Cv_Generator_Server.Helpers.ApplicationDbContext">
+            <summary>
+            ApplicationDbContext
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Helpers.ApplicationDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Cv_Generator_Server.Helpers.ApplicationDbContext})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="P:Cv_Generator_Server.Helpers.ApplicationDbContext.detailUsers">
+            <summary>
+            Model
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Helpers.ApplicationDbContext.users">
+            <summary>
+            Model
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Helpers.ApplicationDbContext.skills">
+            <summary>
+            Model
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Helpers.ApplicationDbContext.profesional_Infos">
+            <summary>
+            Model
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Helpers.ApplicationDbContext.academics">
+            <summary>
+            Model
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Helpers.ApplicationDbContext.contacts">
+            <summary>
+            Model
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Helpers.ApplicationDbContext.experience_Works">
+            <summary>
+            Model
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Helpers.ApplicationDbContext.references">
+            <summary>
+            Model
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Helpers.ApplicationDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Aplicando el afluent api
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:Cv_Generator_Server.Helpers.config.AcademicConfig">
+            <summary>
+            Aplicando fluent api al model
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Helpers.config.AcademicConfig.#ctor(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Cv_Generator_Server.Models.Academic})">
+            <summary>
+            Configurando model
+            </summary>
+            <param name="entityBuilder"></param>
+        </member>
+        <member name="T:Cv_Generator_Server.Helpers.config.ContactConfig">
+            <summary>
+            Aplicando fluent api al model
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Helpers.config.ContactConfig.#ctor(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Cv_Generator_Server.Models.Contact})">
+            <summary>
+            Configurando model
+            </summary>
+            <param name="entityBuilder"></param>
+        </member>
+        <member name="T:Cv_Generator_Server.Helpers.config.DetailUserConfig">
+            <summary>
+            Aplicando fluent api al model
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Helpers.config.DetailUserConfig.#ctor(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Cv_Generator_Server.Models.DetailUser})">
+            <summary>
+            Configurando model
+            </summary>
+            <param name="entityBuilder"></param>
+        </member>
+        <member name="T:Cv_Generator_Server.Helpers.config.ExperienceWorkConfig">
+            <summary>
+            Aplicando fluent api al model
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Helpers.config.ExperienceWorkConfig.#ctor(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Cv_Generator_Server.Models.Experience_Work})">
+            <summary>
+            Configurando model
+            </summary>
+            <param name="entityBuilder"></param>
+        </member>
+        <member name="T:Cv_Generator_Server.Helpers.config.ProfesionalInfoConfig">
+            <summary>
+            Aplicando fluent api al model
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Helpers.config.ProfesionalInfoConfig.#ctor(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Cv_Generator_Server.Models.Profesional_Info})">
+            <summary>
+            Configurando model
+            </summary>
+            <param name="entityBuilder"></param>
+        </member>
+        <member name="T:Cv_Generator_Server.Helpers.config.ReferenceConfig">
+            <summary>
+            Aplicando fluent api al model
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Helpers.config.ReferenceConfig.#ctor(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Cv_Generator_Server.Models.Reference})">
+            <summary>
+            Configurando model
+            </summary>
+            <param name="entityBuilder"></param>
+        </member>
+        <member name="T:Cv_Generator_Server.Helpers.config.SkillConfig">
+            <summary>
+            Aplicando fluent api al model
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Helpers.config.SkillConfig.#ctor(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Cv_Generator_Server.Models.Skill})">
+            <summary>
+            Configurando model
+            </summary>
+            <param name="entityBuilder"></param>
+        </member>
+        <member name="T:Cv_Generator_Server.Helpers.config.UserConfig">
+            <summary>
+            Aplicando fluent api al model
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Helpers.config.UserConfig.#ctor(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{Cv_Generator_Server.Models.User})">
+            <summary>
+            Configurando model
+            </summary>
+            <param name="entityBuilder"></param>
+        </member>
+        <member name="T:Cv_Generator_Server.Helpers.Utils">
+            <summary>
+            Clase Utils, Helper que contiene metodos de uso general
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Helpers.Utils.GetSHA256(System.String)">
+            <summary>
+            Genera SHA256 de un string
+            </summary>
+            <param name="str">Cadena a encriptar</param>
+            <returns>retorna Hash de la cadena</returns>
+        </member>
+        <member name="T:Cv_Generator_Server.Interfaces.IAuthService">
+            <summary>
+            Interfaz para AuthService
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Interfaces.IAuthService.Authenticate(Cv_Generator_Server.Models.DTOs.LoginRequestDTO)">
+            <summary>
+            Metodo para realizar la autenticacion del usuario
+            </summary>
+            <param name="data">Datos para hacer el login [email][password]</param>
+            <returns>retorna el usuario y token jwt, sino el mensaje de error</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Interfaces.IAuthService.GenerateToken(Cv_Generator_Server.Models.User,System.String)">
+            <summary>
+            Permite generar el token JWT
+            </summary>
+            <param name="user">Usuario que intenta loguear</param>
+            <param name="secretKey">Clave secreta</param>
+            <returns>retorna el token JWT</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Interfaces.IAuthService.ChangePassword(Cv_Generator_Server.Models.DTOs.UserPassDTO)">
+            <summary>
+            Permite cambiar la contraseña del usuario logueado
+            </summary>
+            <param name="data">datos para cambiar la contraseña[UserId][Password]</param>
+        </member>
+        <member name="T:Cv_Generator_Server.Interfaces.IUserService">
+            <summary>
+            Interfaz de la clase UserService
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Interfaces.IUserService.Add(Cv_Generator_Server.Models.User)">
+            <summary>
+            Agrega un usuario
+            </summary>
+            <param name="user">informacion del usuario</param>
+        </member>
+        <member name="M:Cv_Generator_Server.Interfaces.IUserService.Get(System.Int32)">
+            <summary>
+            Obtiene un usuario
+            </summary>
+            <param name="id">id del usuario</param>
+            <returns>retorna el usuario solicitado</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Interfaces.IUserService.GetUsers">
+            <summary>
+            Obtiene todos los usuarios
+            </summary>
+            <returns>retorna un listado de usuarios</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Interfaces.IUserService.Update(Cv_Generator_Server.Models.DTOs.UserPhotoDTO)">
+            <summary>
+            Actualiza un usuario
+            </summary>
+            <param name="data">informacion del usuario a actualizar</param>
+        </member>
+        <member name="M:Cv_Generator_Server.Interfaces.IUserService.Delete(System.Int32)">
+            <summary>
+            elimina un usuario
+            </summary>
+            <param name="id">id del usuario a eliminar</param>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.Academic">
+            <summary>
+            Clase academia
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Academic.AcademicId">
+            <summary>
+            Id del curso
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Academic.Type">
+            <summary>
+            Tipo de estudio
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Academic.Institution">
+            <summary>
+            Institucion
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Academic.Degree">
+            <summary>
+            Grado
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Academic.Start_Date">
+            <summary>
+            Fecha Inicio
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Academic.End_Date">
+            <summary>
+            Fecha Fin
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Academic.user">
+            <summary>
+            Usuario asociado
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Academic.UserId">
+            <summary>
+            Id usuario asociado
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.Contact">
+            <summary>
+            Clase contacto
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Contact.ContactId">
+            <summary>
+            Id del contacto
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Contact.Type">
+            <summary>
+            Tipo de contacto
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Contact.Description">
+            <summary>
+            Descripcion del contacto
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Contact.user">
+            <summary>
+            Usuario asociado
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Contact.UserId">
+            <summary>
+            Id usuario asociado
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.DetailUser">
+            <summary>
+            Clase detalle del usuario
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DetailUser.DetailId">
+            <summary>
+            Id del detalle
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DetailUser.First_Name">
+            <summary>
+            Primer nombre
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DetailUser.Second_Name">
+            <summary>
+            Segundo nombre
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DetailUser.Lastname">
+            <summary>
+            Apellidos
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DetailUser.Age">
+            <summary>
+            Edad
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DetailUser.Nit">
+            <summary>
+            Numero identidad
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DetailUser.Birthday">
+            <summary>
+            Fecha nacimiento
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DetailUser.City">
+            <summary>
+            Ciudad
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DetailUser.Nationality">
+            <summary>
+            Nacionalidad
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DetailUser.user">
+            <summary>
+            Usuario asociado
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DetailUser.UserId">
+            <summary>
+            Id usuario asociado
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.DTOs.LoginRequestDTO">
+            <summary>
+            DTO para el login request
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.LoginRequestDTO.email">
+            <summary>
+            Email del usuario a loguear
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.LoginRequestDTO.password">
+            <summary>
+            password del usuario a loguear
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.DTOs.Response.LoginResponseDTO">
+            <summary>
+            DTO para el response del login
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Response.LoginResponseDTO.data">
+            <summary>
+            Objeto a retornar
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.DTOs.Response.ResponseDTO">
+            <summary>
+            DTO para response generico
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Response.ResponseDTO.type">
+            <summary>
+            Tipo de mensaje
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Response.ResponseDTO.message">
+            <summary>
+            Mensaje
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.DTOs.UserPassDTO">
+            <summary>
+            DTO para el request de cambiar contraseña
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.UserPassDTO.UserId">
+            <summary>
+            Id del usuario a cambiar la contraseña
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.UserPassDTO.Password">
+            <summary>
+            Nueva contraseña
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.DTOs.UserPhotoDTO">
+            <summary>
+            DTO para el request de cambiar foto
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.UserPhotoDTO.UserId">
+            <summary>
+            Id del usuario a cambiar la contraseña
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.UserPhotoDTO.Photo">
+            <summary>
+            Nueva contraseña
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.Experience_Work">
+            <summary>
+            Clase experiencia laboral
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Experience_Work.Id">
+            <summary>
+            Id experiencia
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Experience_Work.Company">
+            <summary>
+            Empresa
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Experience_Work.Start_Date">
+            <summary>
+            Fecha inicio
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Experience_Work.End_Date">
+            <summary>
+            Fecha fin
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Experience_Work.Rol">
+            <summary>
+            Cargo ocupado
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Experience_Work.Rol_Description">
+            <summary>
+            Descripcion del cargo
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Experience_Work.user">
+            <summary>
+            Usuario asociado
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Experience_Work.UserId">
+            <summary>
+            Id del usuario asociado
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.Profesional_Info">
+            <summary>
+            Clase profesional info
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Profesional_Info.Id">
+            <summary>
+            ID info
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Profesional_Info.Profesion">
+            <summary>
+            Profesion
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Profesional_Info.Experience">
+            <summary>
+            Experiencia
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Profesional_Info.Profile">
+            <summary>
+            Perfil profesional
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Profesional_Info.Skill">
+            <summary>
+            Habilidades
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Profesional_Info.user">
+            <summary>
+            Usuario asociado
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Profesional_Info.UserId">
+            <summary>
+            Id Usuario asociado
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.Reference">
+            <summary>
+            Clase Referencia
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Reference.ReferenceId">
+            <summary>
+            Id Referencia
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Reference.Name">
+            <summary>
+            Nombre de la referencia
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Reference.Phone">
+            <summary>
+            Telefono de la Referencia
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Reference.Email">
+            <summary>
+            Email de la Referencia
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Reference.user">
+            <summary>
+            Usuario asociado a la Referencia
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Reference.UserId">
+            <summary>
+            Id Usuario asociado a la referencia
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.Skill">
+            <summary>
+            Clase Skill
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Skill.SkillsId">
+            <summary>
+            Id Skill
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Skill.Description">
+            <summary>
+            Descripcion de la Skill
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Skill.Percent">
+            <summary>
+            Porcentaje de esa Skill
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.User">
+            <summary>
+            User Class
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.User.UserId">
+            <summary>
+            ID del usuario
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.User.Username">
+            <summary>
+            Username del usuario
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.User.Email">
+            <summary>
+            Email del usuario
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.User.Password">
+            <summary>
+            Password del usuario
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.User.Token">
+            <summary>
+            Token del usuario
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.User.State">
+            <summary>
+            State del usuario
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.User.Photo">
+            <summary>
+            Photo del usuario
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Services.AuthService">
+            <summary>
+            Servicio para resolver request relacionados a la autenticacion
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.AuthService.#ctor(Cv_Generator_Server.Helpers.ApplicationDbContext)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="context">DbContext</param>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.AuthService.Authenticate(Cv_Generator_Server.Models.DTOs.LoginRequestDTO)">
+            <summary>
+            Metodo para realizar la autenticacion del usuario
+            </summary>
+            <param name="data">Datos para hacer el login [email][password]</param>
+            <returns>retorna el usuario y token jwt, sino el mensaje de error</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.AuthService.GenerateToken(Cv_Generator_Server.Models.User,System.String)">
+            <summary>
+            Permite generar el token JWT
+            </summary>
+            <param name="user">Usuario que intenta loguear</param>
+            <param name="secretKey">Clave secreta</param>
+            <returns>retorna el token JWT</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.AuthService.ChangePassword(Cv_Generator_Server.Models.DTOs.UserPassDTO)">
+            <summary>
+            Permite cambiar la contraseña del usuario logueado
+            </summary>
+            <param name="data">datos para cambiar la contraseña[UserId][Password]</param>
+        </member>
+        <member name="T:Cv_Generator_Server.Services.UserService">
+            <summary>
+            Servicio para resolver request relacionados al usuario
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.UserService.#ctor(Cv_Generator_Server.Helpers.ApplicationDbContext)">
+            <summary>
+            constructor
+            </summary>
+            <param name="context">dbcontext</param>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.UserService.Get(System.Int32)">
+            <summary>
+            Obtiene un usuario
+            </summary>
+            <param name="id">id del usuario</param>
+            <returns>retorna el usuario solicitado</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.UserService.GetUsers">
+            <summary>
+            Obtiene todos los usuarios
+            </summary>
+            <returns>retorna un listado de usuarios</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.UserService.Add(Cv_Generator_Server.Models.User)">
+            <summary>
+            Agrega un usuario
+            </summary>
+            <param name="user">informacion del usuario</param>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.UserService.Delete(System.Int32)">
+            <summary>
+            elimina un usuario
+            </summary>
+            <param name="id">id del usuario a eliminar</param>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.UserService.Update(Cv_Generator_Server.Models.DTOs.UserPhotoDTO)">
+            <summary>
+            Actualiza un usuario
+            </summary>
+            <param name="data">informacion del usuario a actualizar</param>
         </member>
     </members>
 </doc>

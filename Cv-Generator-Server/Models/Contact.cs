@@ -1,18 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Cv_Generator_Server.Models
+﻿namespace Cv_Generator_Server.Models
 {
+    /// <summary>
+    /// Clase contacto
+    /// </summary>
     public class Contact
     {
-        
+        /// <summary>
+        /// Id del contacto
+        /// </summary>
         public int ContactId { get; set; }
+        /// <summary>
+        /// Tipo de contacto
+        /// </summary>
         public string Type { get; set; }
+        /// <summary>
+        /// Descripcion del contacto
+        /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// Usuario asociado
+        /// </summary>
         public User user { get; set; }
+        /// <summary>
+        /// Id usuario asociado
+        /// </summary>
         public int UserId { get; set; }
     }
 }

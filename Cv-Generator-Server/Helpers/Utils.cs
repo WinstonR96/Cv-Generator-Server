@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Cv_Generator_Server.Helpers
 {
+
+    /// <summary>
+    /// Clase Utils, Helper que contiene metodos de uso general
+    /// </summary>
     public static class Utils
     {
+        /// <summary>
+        /// Genera SHA256 de un string
+        /// </summary>
+        /// <param name="str">Cadena a encriptar</param>
+        /// <returns>retorna Hash de la cadena</returns>
         public static string GetSHA256(string str)
         {
             SHA256 sha256 = SHA256Managed.Create();
