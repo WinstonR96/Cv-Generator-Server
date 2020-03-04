@@ -77,6 +77,7 @@ namespace Cv_Generator_Server
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IAcademicService, AcademicService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

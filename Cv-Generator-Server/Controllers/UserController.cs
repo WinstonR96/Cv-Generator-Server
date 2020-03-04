@@ -2,6 +2,7 @@
 using Cv_Generator_Server.Interfaces;
 using Cv_Generator_Server.Models;
 using Cv_Generator_Server.Models.DTOs;
+using Cv_Generator_Server.Models.DTOs.Response;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -43,8 +44,7 @@ namespace Cv_Generator_Server.Controllers
         [HttpGet]
         public ActionResult<List<User>> GetUsers()
         {
-            var user = _userService.GetUsers();
-            return user;
+            return _userService.GetUsers();
         }
         
         /// <summary>
@@ -56,10 +56,7 @@ namespace Cv_Generator_Server.Controllers
         public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _userService.Get(id);
-            if (user == null)
-                return NotFound();
-            return user;
-            
+            return user == null ? NotFound() : (ActionResult<User>)user;
         }
 
         /// <summary>
@@ -80,7 +77,11 @@ namespace Cv_Generator_Server.Controllers
                 return CreatedAtAction(nameof(GetUser), new { id = data.UserId }, data);
             }catch(Exception ex)
             {
-                return Ok(ex.Message);
+                return Ok(new ResponseDTO()
+                {
+                    message = ex.Message,
+                    type = "E"
+                });
             }
         }
 
@@ -97,6 +98,32 @@ namespace Cv_Generator_Server.Controllers
 
             _userService.Update(data);
             return CreatedAtAction(nameof(GetUser), new { id = data.UserId }, data);
+        }
+
+        /// <summary>
+        /// elimina un usuario
+        /// </summary>
+        /// <param name="id">id del usuario a eliminar</param>
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _userService.Delete(id);
+                return Ok(new ResponseDTO()
+                {
+                    type = "I",
+                    message = "Eliminado sastifactoriamente"
+                });
+            }catch(Exception ex)
+            {
+                return Ok(new ResponseDTO()
+                {
+                    type = "E",
+                    message = ex.Message
+                });
+            }
+            
         }
     }
 }

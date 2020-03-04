@@ -29,5 +29,9 @@
         /// Id Usuario asociado a la referencia
         /// </summary>
         public int UserId { get; set; }
+        /// <summary>
+        /// State del reference
+        /// </summary>
+        public int State { get; set; }
     }
 }

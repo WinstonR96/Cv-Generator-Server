@@ -25,5 +25,9 @@
         /// Id usuario asociado
         /// </summary>
         public int UserId { get; set; }
+        /// <summary>
+        /// State del contact
+        /// </summary>
+        public int State { get; set; }
     }
 }

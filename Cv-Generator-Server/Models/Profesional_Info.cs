@@ -35,5 +35,9 @@ namespace Cv_Generator_Server.Models
         /// Id Usuario asociado
         /// </summary>
         public int UserId { get; set; }
+        /// <summary>
+        /// State del profesional info
+        /// </summary>
+        public int State { get; set; }
     }
 }

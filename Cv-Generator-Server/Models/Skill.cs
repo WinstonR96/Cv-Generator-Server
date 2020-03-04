@@ -17,5 +17,9 @@
         /// Porcentaje de esa Skill
         /// </summary>
         public int Percent { get; set; }
+        /// <summary>
+        /// State del skill
+        /// </summary>
+        public int State { get; set; }
     }
 }

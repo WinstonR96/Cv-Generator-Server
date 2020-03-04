@@ -4,6 +4,50 @@
         <name>Cv-Generator-Server</name>
     </assembly>
     <members>
+        <member name="T:Cv_Generator_Server.Controllers.AcademicController">
+            <summary>
+            Controlador del modelo Academic
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.AcademicController.#ctor(Microsoft.Extensions.Logging.ILogger{Cv_Generator_Server.Controllers.AcademicController},Microsoft.Extensions.Configuration.IConfiguration,Cv_Generator_Server.Interfaces.IAcademicService)">
+            <summary>
+            constructor
+            </summary>
+            <param name="logger"></param>
+            <param name="configuration"></param>
+            <param name="academicService"></param>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.AcademicController.GetAcademics">
+            <summary>
+            Obtiene todos los datos academico
+            </summary>
+            <returns>retorna un listado de datos academico</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.AcademicController.GetAcademic(System.Int32)">
+            <summary>
+            Obtiene un dato academico
+            </summary>
+            <param name="id">id del dato</param>
+            <returns>retorna el dato academico solicitado</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.AcademicController.Add(Cv_Generator_Server.Models.Academic)">
+            <summary>
+            Agrega un dato academico
+            </summary>
+            <param name="academic">informacion de datos academico</param>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.AcademicController.Update(Cv_Generator_Server.Models.Academic)">
+            <summary>
+            Actualiza un dato academico
+            </summary>
+            <param name="data">informacion del datos academico a actualizar</param>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.AcademicController.Delete(System.Int32)">
+            <summary>
+            elimina un dato academico
+            </summary>
+            <param name="id">id del dato academico a eliminar</param>
+        </member>
         <member name="T:Cv_Generator_Server.Controllers.AuthController">
             <summary>
             Controlador que permite gestionar la sesion del usuario
@@ -70,6 +114,12 @@
             </summary>
             <param name="data">Datos del usuario a modificar [UserId] y [Photo]</param>
             <returns>Retorna el usuario actualoizado sino retorna el error</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Controllers.UserController.Delete(System.Int32)">
+            <summary>
+            elimina un usuario
+            </summary>
+            <param name="id">id del usuario a eliminar</param>
         </member>
         <member name="T:Cv_Generator_Server.Helpers.ApplicationDbContext">
             <summary>
@@ -228,6 +278,42 @@
             <param name="str">Cadena a encriptar</param>
             <returns>retorna Hash de la cadena</returns>
         </member>
+        <member name="T:Cv_Generator_Server.Interfaces.IAcademicService">
+            <summary>
+            Interfaz de la clase Academic Service
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Interfaces.IAcademicService.Add(Cv_Generator_Server.Models.Academic)">
+            <summary>
+            Agrega un dato academico
+            </summary>
+            <param name="academic">informacion de datos academico</param>
+        </member>
+        <member name="M:Cv_Generator_Server.Interfaces.IAcademicService.Get(System.Int32)">
+            <summary>
+            Obtiene un dato academico
+            </summary>
+            <param name="id">id del dato</param>
+            <returns>retorna el dato academico solicitado</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Interfaces.IAcademicService.GetAcademicsData">
+            <summary>
+            Obtiene todos los datos academico
+            </summary>
+            <returns>retorna un listado de datos academico</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Interfaces.IAcademicService.Update(Cv_Generator_Server.Models.Academic)">
+            <summary>
+            Actualiza un dato academico
+            </summary>
+            <param name="data">informacion del datos academico a actualizar</param>
+        </member>
+        <member name="M:Cv_Generator_Server.Interfaces.IAcademicService.Delete(System.Int32)">
+            <summary>
+            elimina un dato academico
+            </summary>
+            <param name="id">id del dato academico a eliminar</param>
+        </member>
         <member name="T:Cv_Generator_Server.Interfaces.IAuthService">
             <summary>
             Interfaz para AuthService
@@ -335,6 +421,11 @@
             Id usuario asociado
             </summary>
         </member>
+        <member name="P:Cv_Generator_Server.Models.Academic.State">
+            <summary>
+            State del academic
+            </summary>
+        </member>
         <member name="T:Cv_Generator_Server.Models.Contact">
             <summary>
             Clase contacto
@@ -363,6 +454,11 @@
         <member name="P:Cv_Generator_Server.Models.Contact.UserId">
             <summary>
             Id usuario asociado
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Contact.State">
+            <summary>
+            State del contact
             </summary>
         </member>
         <member name="T:Cv_Generator_Server.Models.DetailUser">
@@ -423,6 +519,11 @@
         <member name="P:Cv_Generator_Server.Models.DetailUser.UserId">
             <summary>
             Id usuario asociado
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DetailUser.State">
+            <summary>
+            State del detail user
             </summary>
         </member>
         <member name="T:Cv_Generator_Server.Models.DTOs.LoginRequestDTO">
@@ -540,6 +641,11 @@
             Id del usuario asociado
             </summary>
         </member>
+        <member name="P:Cv_Generator_Server.Models.Experience_Work.State">
+            <summary>
+            State del experience work
+            </summary>
+        </member>
         <member name="T:Cv_Generator_Server.Models.Profesional_Info">
             <summary>
             Clase profesional info
@@ -580,6 +686,11 @@
             Id Usuario asociado
             </summary>
         </member>
+        <member name="P:Cv_Generator_Server.Models.Profesional_Info.State">
+            <summary>
+            State del profesional info
+            </summary>
+        </member>
         <member name="T:Cv_Generator_Server.Models.Reference">
             <summary>
             Clase Referencia
@@ -615,6 +726,11 @@
             Id Usuario asociado a la referencia
             </summary>
         </member>
+        <member name="P:Cv_Generator_Server.Models.Reference.State">
+            <summary>
+            State del reference
+            </summary>
+        </member>
         <member name="T:Cv_Generator_Server.Models.Skill">
             <summary>
             Clase Skill
@@ -633,6 +749,11 @@
         <member name="P:Cv_Generator_Server.Models.Skill.Percent">
             <summary>
             Porcentaje de esa Skill
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.Skill.State">
+            <summary>
+            State del skill
             </summary>
         </member>
         <member name="T:Cv_Generator_Server.Models.User">
@@ -674,6 +795,48 @@
             <summary>
             Photo del usuario
             </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Services.AcademicService">
+            <summary>
+            Servicio para resolver request de la entidad Academic
+            </summary>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.AcademicService.#ctor(Cv_Generator_Server.Helpers.ApplicationDbContext)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.AcademicService.Add(Cv_Generator_Server.Models.Academic)">
+            <summary>
+            Agrega un dato academico
+            </summary>
+            <param name="academic">informacion de datos academico</param>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.AcademicService.Delete(System.Int32)">
+            <summary>
+            elimina un dato academico
+            </summary>
+            <param name="id">id del dato academico a eliminar</param>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.AcademicService.Get(System.Int32)">
+            <summary>
+            Obtiene un dato academico
+            </summary>
+            <param name="id">id del dato</param>
+            <returns>retorna el dato academico solicitado</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.AcademicService.GetAcademicsData">
+            <summary>
+            Obtiene todos los datos academico
+            </summary>
+            <returns>retorna un listado de datos academico</returns>
+        </member>
+        <member name="M:Cv_Generator_Server.Services.AcademicService.Update(Cv_Generator_Server.Models.Academic)">
+            <summary>
+            Actualiza un dato academico
+            </summary>
+            <param name="data">informacion del datos academico a actualizar</param>
         </member>
         <member name="T:Cv_Generator_Server.Services.AuthService">
             <summary>

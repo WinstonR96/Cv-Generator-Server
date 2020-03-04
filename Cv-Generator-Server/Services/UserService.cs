@@ -41,7 +41,7 @@ namespace Cv_Generator_Server.Services
         /// <returns>retorna un listado de usuarios</returns>
         public List<User> GetUsers()
         {
-            return _context.users.ToList();
+            return _context.users.Where(x => x.State == 1).ToList();
         }
 
         /// <summary>
@@ -64,10 +64,17 @@ namespace Cv_Generator_Server.Services
         /// <param name="id">id del usuario a eliminar</param>
         public void Delete(int id)
         {
-            var userOriginal = _context.users.Single(x => x.UserId == id);
-            userOriginal.State = -1;
-            _context.Update(userOriginal);
-            _context.SaveChanges();
+            try
+            {
+                var userOriginal = _context.users.Single(x => x.UserId == id);
+                userOriginal.State = -1;
+                _context.Update(userOriginal);
+                _context.SaveChanges();
+            }catch(Exception)
+            {
+                throw;
+            }
+            
         }
 
         /// <summary>
