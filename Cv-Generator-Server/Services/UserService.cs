@@ -2,6 +2,7 @@
 using Cv_Generator_Server.Interfaces;
 using Cv_Generator_Server.Models;
 using Cv_Generator_Server.Models.DTOs;
+using Cv_Generator_Server.Models.DTOs.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,7 @@ namespace Cv_Generator_Server.Services
             if (userOriginal != null)
                 throw new Exception("El usuario ya existe");
 
+            user.State = 1;
             _context.users.Add(user);
             _context.SaveChanges();
         }

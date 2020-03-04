@@ -1,5 +1,6 @@
 ﻿using Cv_Generator_Server.Models;
 using Cv_Generator_Server.Models.DTOs;
+using Cv_Generator_Server.Models.DTOs.Request;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

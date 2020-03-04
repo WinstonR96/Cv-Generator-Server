@@ -1,5 +1,6 @@
 ﻿using Cv_Generator_Server.Models;
 using Cv_Generator_Server.Models.DTOs;
+using Cv_Generator_Server.Models.DTOs.Request;
 
 namespace Cv_Generator_Server.Interfaces
 {

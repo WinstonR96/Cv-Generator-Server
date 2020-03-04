@@ -2,6 +2,7 @@
 using Cv_Generator_Server.Interfaces;
 using Cv_Generator_Server.Models;
 using Cv_Generator_Server.Models.DTOs;
+using Cv_Generator_Server.Models.DTOs.Request;
 using Cv_Generator_Server.Models.DTOs.Response;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;

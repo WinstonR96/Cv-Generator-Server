@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cv_Generator_Server.Interfaces;
 using Cv_Generator_Server.Models;
+using Cv_Generator_Server.Models.DTOs;
+using Cv_Generator_Server.Models.DTOs.Request;
 using Cv_Generator_Server.Models.DTOs.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -41,7 +43,7 @@ namespace Cv_Generator_Server.Controllers
         /// </summary>
         /// <returns>retorna un listado de datos academico</returns>
         [HttpGet]
-        public ActionResult<List<Academic>> GetAcademics()
+        public ActionResult<List<ResponseAcademicDTO>> GetAcademics()
         {
             return _academicService.GetAcademicsData();
         }
@@ -52,10 +54,10 @@ namespace Cv_Generator_Server.Controllers
         /// <param name="id">id del dato</param>
         /// <returns>retorna el dato academico solicitado</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Academic>> GetAcademic(int id)
+        public async Task<ActionResult<ResponseAcademicDTO>> GetAcademic(int id)
         {
             var academic = await _academicService.Get(id);
-            return academic == null ? NotFound() : (ActionResult<Academic>)academic;
+            return academic == null ? NotFound() : (ActionResult<ResponseAcademicDTO>)academic;
         }
 
         /// <summary>
@@ -63,14 +65,14 @@ namespace Cv_Generator_Server.Controllers
         /// </summary>
         /// <param name="academic">informacion de datos academico</param>
         [HttpPost]
-        public ActionResult Add([FromBody] Academic academic)
+        public ActionResult Add([FromBody] AcademicAddDTO academic)
         {
             if (academic == null)
                 return BadRequest();
             try
             {
-                _academicService.Add(academic);
-                return CreatedAtAction(nameof(GetAcademic), new { id = academic.AcademicId }, academic);
+                var data = _academicService.Add(academic);
+                return CreatedAtAction(nameof(GetAcademic), new { id = data.AcademicId }, academic);
             }
             catch (Exception ex)
             {
@@ -87,7 +89,7 @@ namespace Cv_Generator_Server.Controllers
         /// </summary>
         /// <param name="data">informacion del datos academico a actualizar</param>
         [HttpPut]
-        public IActionResult Update([FromBody] Academic data)
+        public IActionResult Update([FromBody] AcademicUpdateDTO data)
         {
             if (data == null)
                 return BadRequest();

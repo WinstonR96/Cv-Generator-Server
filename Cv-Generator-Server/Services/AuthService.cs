@@ -3,6 +3,7 @@ using Cv_Generator_Server.Helpers;
 using Cv_Generator_Server.Interfaces;
 using Cv_Generator_Server.Models;
 using Cv_Generator_Server.Models.DTOs;
+using Cv_Generator_Server.Models.DTOs.Request;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;

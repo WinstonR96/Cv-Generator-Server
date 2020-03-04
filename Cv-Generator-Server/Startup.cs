@@ -4,6 +4,7 @@ using Cv_Generator_Server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,9 +29,6 @@ namespace Cv_Generator_Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-
-
             services.AddCors();
 
             services.AddDbContext<ApplicationDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -105,7 +103,9 @@ namespace Cv_Generator_Server
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllerRoute(name: "default", pattern: "/swagger");
                 endpoints.MapControllers();
+                endpoints.MapGet("/", context => context.Response.WriteAsync("API FUNCIONANDO"));
             });
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.

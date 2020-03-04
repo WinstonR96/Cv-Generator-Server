@@ -1,4 +1,4 @@
-﻿namespace Cv_Generator_Server.Models.DTOs
+﻿namespace Cv_Generator_Server.Models.DTOs.Request
 {
     /// <summary>
     /// DTO para el login request

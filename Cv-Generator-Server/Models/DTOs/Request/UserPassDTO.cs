@@ -1,9 +1,9 @@
-﻿namespace Cv_Generator_Server.Models.DTOs
+﻿namespace Cv_Generator_Server.Models.DTOs.Request
 {
     /// <summary>
-    /// DTO para el request de cambiar foto
+    /// DTO para el request de cambiar contraseña
     /// </summary>
-    public class UserPhotoDTO
+    public class UserPassDTO
     {
         /// <summary>
         /// Id del usuario a cambiar la contraseña
@@ -12,6 +12,7 @@
         /// <summary>
         /// Nueva contraseña
         /// </summary>
-        public string Photo { get; set; }
+        public string Password { get; set; }
+
     }
 }

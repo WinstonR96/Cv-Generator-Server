@@ -1,6 +1,9 @@
 ﻿using Cv_Generator_Server.Helpers;
 using Cv_Generator_Server.Interfaces;
 using Cv_Generator_Server.Models;
+using Cv_Generator_Server.Models.DTOs;
+using Cv_Generator_Server.Models.DTOs.Request;
+using Cv_Generator_Server.Models.DTOs.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,13 +30,24 @@ namespace Cv_Generator_Server.Services
         /// <summary>
         /// Agrega un dato academico
         /// </summary>
-        /// <param name="academic">informacion de datos academico</param>
-        public void Add(Academic academic)
+        /// <param name="data">informacion de datos academico</param>
+        public Academic Add(AcademicAddDTO data)
         {
+            Academic academic = new Academic()
+            {
+                Degree = data.Degree,
+                UserId = data.UserId,
+                Type = data.Type,
+                Start_Date = data.Start_Date,
+                End_Date = data.End_Date,
+                Institution = data.Institution,
+                State = 1,
+            };
             try
             {
                 _context.academics.Add(academic);
                 _context.SaveChanges();
+                return academic;
             }catch (Exception)
             {
                 throw;
@@ -64,25 +78,48 @@ namespace Cv_Generator_Server.Services
         /// </summary>
         /// <param name="id">id del dato</param>
         /// <returns>retorna el dato academico solicitado</returns>
-        public async Task<Academic> Get(int id)
+        public async Task<ResponseAcademicDTO> Get(int id)
         {
-            return await _context.academics.FindAsync(id);
+            var academic = await _context.academics.FindAsync(id);
+            return new ResponseAcademicDTO()
+            {
+                Type = academic.Type,
+                AcademicId = academic.AcademicId,
+                Institution = academic.Institution,
+                Degree = academic.Degree,
+                End_Date = academic.End_Date,
+                Start_Date = academic.Start_Date
+            };
         }
 
         /// <summary>
         /// Obtiene todos los datos academico
         /// </summary>
         /// <returns>retorna un listado de datos academico</returns>
-        public List<Academic> GetAcademicsData()
+        public List<ResponseAcademicDTO> GetAcademicsData()
         {
-            return _context.academics.Where(x => x.State == 1).ToList();
+            var academics = _context.academics.Where(x => x.State == 1).ToList();
+            List<ResponseAcademicDTO> academicDTOs = new List<ResponseAcademicDTO>();
+            foreach(var dto in academics)
+            {
+                academicDTOs.Add(new ResponseAcademicDTO()
+                {
+                    AcademicId = dto.AcademicId,
+                    Degree = dto.Degree,
+                    End_Date = dto.End_Date,
+                    Institution = dto.Institution,
+                    Start_Date = dto.Start_Date,
+                    Type = dto.Type
+                });
+            }
+            return academicDTOs;
         }
 
         /// <summary>
         /// Actualiza un dato academico
         /// </summary>
         /// <param name="data">informacion del datos academico a actualizar</param>
-        public void Update(Academic data)
+        public void Update(AcademicUpdateDTO data)
         {
             try
             {

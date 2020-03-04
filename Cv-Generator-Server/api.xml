@@ -30,13 +30,13 @@
             <param name="id">id del dato</param>
             <returns>retorna el dato academico solicitado</returns>
         </member>
-        <member name="M:Cv_Generator_Server.Controllers.AcademicController.Add(Cv_Generator_Server.Models.Academic)">
+        <member name="M:Cv_Generator_Server.Controllers.AcademicController.Add(Cv_Generator_Server.Models.DTOs.Request.AcademicAddDTO)">
             <summary>
             Agrega un dato academico
             </summary>
             <param name="academic">informacion de datos academico</param>
         </member>
-        <member name="M:Cv_Generator_Server.Controllers.AcademicController.Update(Cv_Generator_Server.Models.Academic)">
+        <member name="M:Cv_Generator_Server.Controllers.AcademicController.Update(Cv_Generator_Server.Models.DTOs.Request.AcademicUpdateDTO)">
             <summary>
             Actualiza un dato academico
             </summary>
@@ -61,14 +61,14 @@
             <param name="configuration"></param>
             <param name="authService"></param>
         </member>
-        <member name="M:Cv_Generator_Server.Controllers.AuthController.Login(Cv_Generator_Server.Models.DTOs.LoginRequestDTO)">
+        <member name="M:Cv_Generator_Server.Controllers.AuthController.Login(Cv_Generator_Server.Models.DTOs.Request.LoginRequestDTO)">
             <summary>
             Metodo para realizar login y generar token
             </summary>
             <param name="data">Informacion para solicitar el login [email] [password]</param>
             <returns>Retorna datos del usuario asi como el token JWT</returns>
         </member>
-        <member name="M:Cv_Generator_Server.Controllers.AuthController.ChangePassword(Cv_Generator_Server.Models.DTOs.UserPassDTO)">
+        <member name="M:Cv_Generator_Server.Controllers.AuthController.ChangePassword(Cv_Generator_Server.Models.DTOs.Request.UserPassDTO)">
             <summary>
             Permite cambiar la contraseña del usuario logueado
             </summary>
@@ -108,7 +108,7 @@
             <param name="data">Informacion del nuevo usuario</param>
             <returns>Si es exitoso retorna el nuevo usuario, sino retorna el error</returns>
         </member>
-        <member name="M:Cv_Generator_Server.Controllers.UserController.Update(Cv_Generator_Server.Models.DTOs.UserPhotoDTO)">
+        <member name="M:Cv_Generator_Server.Controllers.UserController.Update(Cv_Generator_Server.Models.DTOs.Request.UserPhotoDTO)">
             <summary>
             Actualizar un usuario, por el momento solo se puede actualizar la foto
             </summary>
@@ -283,7 +283,7 @@
             Interfaz de la clase Academic Service
             </summary>
         </member>
-        <member name="M:Cv_Generator_Server.Interfaces.IAcademicService.Add(Cv_Generator_Server.Models.Academic)">
+        <member name="M:Cv_Generator_Server.Interfaces.IAcademicService.Add(Cv_Generator_Server.Models.DTOs.Request.AcademicAddDTO)">
             <summary>
             Agrega un dato academico
             </summary>
@@ -302,7 +302,7 @@
             </summary>
             <returns>retorna un listado de datos academico</returns>
         </member>
-        <member name="M:Cv_Generator_Server.Interfaces.IAcademicService.Update(Cv_Generator_Server.Models.Academic)">
+        <member name="M:Cv_Generator_Server.Interfaces.IAcademicService.Update(Cv_Generator_Server.Models.DTOs.Request.AcademicUpdateDTO)">
             <summary>
             Actualiza un dato academico
             </summary>
@@ -319,7 +319,7 @@
             Interfaz para AuthService
             </summary>
         </member>
-        <member name="M:Cv_Generator_Server.Interfaces.IAuthService.Authenticate(Cv_Generator_Server.Models.DTOs.LoginRequestDTO)">
+        <member name="M:Cv_Generator_Server.Interfaces.IAuthService.Authenticate(Cv_Generator_Server.Models.DTOs.Request.LoginRequestDTO)">
             <summary>
             Metodo para realizar la autenticacion del usuario
             </summary>
@@ -334,7 +334,7 @@
             <param name="secretKey">Clave secreta</param>
             <returns>retorna el token JWT</returns>
         </member>
-        <member name="M:Cv_Generator_Server.Interfaces.IAuthService.ChangePassword(Cv_Generator_Server.Models.DTOs.UserPassDTO)">
+        <member name="M:Cv_Generator_Server.Interfaces.IAuthService.ChangePassword(Cv_Generator_Server.Models.DTOs.Request.UserPassDTO)">
             <summary>
             Permite cambiar la contraseña del usuario logueado
             </summary>
@@ -364,7 +364,7 @@
             </summary>
             <returns>retorna un listado de usuarios</returns>
         </member>
-        <member name="M:Cv_Generator_Server.Interfaces.IUserService.Update(Cv_Generator_Server.Models.DTOs.UserPhotoDTO)">
+        <member name="M:Cv_Generator_Server.Interfaces.IUserService.Update(Cv_Generator_Server.Models.DTOs.Request.UserPhotoDTO)">
             <summary>
             Actualiza un usuario
             </summary>
@@ -526,19 +526,124 @@
             State del detail user
             </summary>
         </member>
-        <member name="T:Cv_Generator_Server.Models.DTOs.LoginRequestDTO">
+        <member name="T:Cv_Generator_Server.Models.DTOs.Request.AcademicAddDTO">
+            <summary>
+            DTO auxiliar para la class Academic
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.AcademicAddDTO.Type">
+            <summary>
+            Tipo de estudio
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.AcademicAddDTO.Institution">
+            <summary>
+            Institucion
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.AcademicAddDTO.Degree">
+            <summary>
+            Grado
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.AcademicAddDTO.Start_Date">
+            <summary>
+            Fecha Inicio
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.AcademicAddDTO.End_Date">
+            <summary>
+            Fecha Fin
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.AcademicAddDTO.UserId">
+            <summary>
+            Id usuario asociado
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.DTOs.Request.AcademicUpdateDTO">
+            <summary>
+            DTO para request de actualizar datos academicos
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.AcademicUpdateDTO.AcademicId">
+            <summary>
+            Id del curso
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.AcademicUpdateDTO.Type">
+            <summary>
+            Tipo de estudio
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.AcademicUpdateDTO.Institution">
+            <summary>
+            Institucion
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.AcademicUpdateDTO.Degree">
+            <summary>
+            Grado
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.AcademicUpdateDTO.Start_Date">
+            <summary>
+            Fecha Inicio
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.AcademicUpdateDTO.End_Date">
+            <summary>
+            Fecha Fin
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.AcademicUpdateDTO.UserId">
+            <summary>
+            Id usuario asociado
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.DTOs.Request.LoginRequestDTO">
             <summary>
             DTO para el login request
             </summary>
         </member>
-        <member name="P:Cv_Generator_Server.Models.DTOs.LoginRequestDTO.email">
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.LoginRequestDTO.email">
             <summary>
             Email del usuario a loguear
             </summary>
         </member>
-        <member name="P:Cv_Generator_Server.Models.DTOs.LoginRequestDTO.password">
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.LoginRequestDTO.password">
             <summary>
             password del usuario a loguear
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.DTOs.Request.UserPassDTO">
+            <summary>
+            DTO para el request de cambiar contraseña
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.UserPassDTO.UserId">
+            <summary>
+            Id del usuario a cambiar la contraseña
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.UserPassDTO.Password">
+            <summary>
+            Nueva contraseña
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.DTOs.Request.UserPhotoDTO">
+            <summary>
+            DTO para el request de cambiar foto
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.UserPhotoDTO.UserId">
+            <summary>
+            Id del usuario a cambiar la contraseña
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.UserPhotoDTO.Photo">
+            <summary>
+            Nueva contraseña
             </summary>
         </member>
         <member name="T:Cv_Generator_Server.Models.DTOs.Response.LoginResponseDTO">
@@ -549,6 +654,41 @@
         <member name="P:Cv_Generator_Server.Models.DTOs.Response.LoginResponseDTO.data">
             <summary>
             Objeto a retornar
+            </summary>
+        </member>
+        <member name="T:Cv_Generator_Server.Models.DTOs.Response.ResponseAcademicDTO">
+            <summary>
+            DTO response academic
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Response.ResponseAcademicDTO.AcademicId">
+            <summary>
+            Id del curso
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Response.ResponseAcademicDTO.Type">
+            <summary>
+            Tipo de estudio
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Response.ResponseAcademicDTO.Institution">
+            <summary>
+            Institucion
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Response.ResponseAcademicDTO.Degree">
+            <summary>
+            Grado
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Response.ResponseAcademicDTO.Start_Date">
+            <summary>
+            Fecha Inicio
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Response.ResponseAcademicDTO.End_Date">
+            <summary>
+            Fecha Fin
             </summary>
         </member>
         <member name="T:Cv_Generator_Server.Models.DTOs.Response.ResponseDTO">
@@ -564,36 +704,6 @@
         <member name="P:Cv_Generator_Server.Models.DTOs.Response.ResponseDTO.message">
             <summary>
             Mensaje
-            </summary>
-        </member>
-        <member name="T:Cv_Generator_Server.Models.DTOs.UserPassDTO">
-            <summary>
-            DTO para el request de cambiar contraseña
-            </summary>
-        </member>
-        <member name="P:Cv_Generator_Server.Models.DTOs.UserPassDTO.UserId">
-            <summary>
-            Id del usuario a cambiar la contraseña
-            </summary>
-        </member>
-        <member name="P:Cv_Generator_Server.Models.DTOs.UserPassDTO.Password">
-            <summary>
-            Nueva contraseña
-            </summary>
-        </member>
-        <member name="T:Cv_Generator_Server.Models.DTOs.UserPhotoDTO">
-            <summary>
-            DTO para el request de cambiar foto
-            </summary>
-        </member>
-        <member name="P:Cv_Generator_Server.Models.DTOs.UserPhotoDTO.UserId">
-            <summary>
-            Id del usuario a cambiar la contraseña
-            </summary>
-        </member>
-        <member name="P:Cv_Generator_Server.Models.DTOs.UserPhotoDTO.Photo">
-            <summary>
-            Nueva contraseña
             </summary>
         </member>
         <member name="T:Cv_Generator_Server.Models.Experience_Work">
@@ -807,11 +917,11 @@
             </summary>
             <param name="context"></param>
         </member>
-        <member name="M:Cv_Generator_Server.Services.AcademicService.Add(Cv_Generator_Server.Models.Academic)">
+        <member name="M:Cv_Generator_Server.Services.AcademicService.Add(Cv_Generator_Server.Models.DTOs.Request.AcademicAddDTO)">
             <summary>
             Agrega un dato academico
             </summary>
-            <param name="academic">informacion de datos academico</param>
+            <param name="data">informacion de datos academico</param>
         </member>
         <member name="M:Cv_Generator_Server.Services.AcademicService.Delete(System.Int32)">
             <summary>
@@ -832,7 +942,7 @@
             </summary>
             <returns>retorna un listado de datos academico</returns>
         </member>
-        <member name="M:Cv_Generator_Server.Services.AcademicService.Update(Cv_Generator_Server.Models.Academic)">
+        <member name="M:Cv_Generator_Server.Services.AcademicService.Update(Cv_Generator_Server.Models.DTOs.Request.AcademicUpdateDTO)">
             <summary>
             Actualiza un dato academico
             </summary>
@@ -849,7 +959,7 @@
             </summary>
             <param name="context">DbContext</param>
         </member>
-        <member name="M:Cv_Generator_Server.Services.AuthService.Authenticate(Cv_Generator_Server.Models.DTOs.LoginRequestDTO)">
+        <member name="M:Cv_Generator_Server.Services.AuthService.Authenticate(Cv_Generator_Server.Models.DTOs.Request.LoginRequestDTO)">
             <summary>
             Metodo para realizar la autenticacion del usuario
             </summary>
@@ -864,7 +974,7 @@
             <param name="secretKey">Clave secreta</param>
             <returns>retorna el token JWT</returns>
         </member>
-        <member name="M:Cv_Generator_Server.Services.AuthService.ChangePassword(Cv_Generator_Server.Models.DTOs.UserPassDTO)">
+        <member name="M:Cv_Generator_Server.Services.AuthService.ChangePassword(Cv_Generator_Server.Models.DTOs.Request.UserPassDTO)">
             <summary>
             Permite cambiar la contraseña del usuario logueado
             </summary>
@@ -906,7 +1016,7 @@
             </summary>
             <param name="id">id del usuario a eliminar</param>
         </member>
-        <member name="M:Cv_Generator_Server.Services.UserService.Update(Cv_Generator_Server.Models.DTOs.UserPhotoDTO)">
+        <member name="M:Cv_Generator_Server.Services.UserService.Update(Cv_Generator_Server.Models.DTOs.Request.UserPhotoDTO)">
             <summary>
             Actualiza un usuario
             </summary>

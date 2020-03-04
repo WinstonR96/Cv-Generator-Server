@@ -1,6 +1,7 @@
 ﻿using System;
 using Cv_Generator_Server.Interfaces;
 using Cv_Generator_Server.Models.DTOs;
+using Cv_Generator_Server.Models.DTOs.Request;
 using Cv_Generator_Server.Models.DTOs.Response;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
