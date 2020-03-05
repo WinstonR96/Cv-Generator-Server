@@ -1,7 +1,6 @@
 ﻿using Cv_Generator_Server.Helpers;
 using Cv_Generator_Server.Interfaces;
 using Cv_Generator_Server.Models;
-using Cv_Generator_Server.Models.DTOs;
 using Cv_Generator_Server.Models.DTOs.Request;
 using System;
 using System.Collections.Generic;
@@ -49,15 +48,24 @@ namespace Cv_Generator_Server.Services
         /// Agrega un usuario
         /// </summary>
         /// <param name="user">informacion del usuario</param>
-        public void Add(User user)
+        public User Add(UserAddDTO user)
         {
             var userOriginal = _context.users.Single(x => x.Email == user.Email || x.Username == user.Username);
             if (userOriginal != null)
                 throw new Exception("El usuario ya existe");
 
-            user.State = 1;
-            _context.users.Add(user);
+            User newUser = new User()
+            {
+                Email = user.Email,
+                Password = Utils.GetSHA256(user.Password),
+                Photo = user.Photo,
+                State = 1,
+                Username = user.Username,
+                Token = Utils.GetSHA256(user.Email+user.Username+user.Password)
+            };
+            _context.users.Add(newUser);
             _context.SaveChanges();
+            return newUser;
         }
 
         /// <summary>

@@ -15,14 +15,14 @@ namespace Cv_Generator_Server.Interfaces
         /// Agrega un usuario
         /// </summary>
         /// <param name="user">informacion del usuario</param>
-        public void Add(User user);
+        public User Add(UserAddDTO user);
 
         /// <summary>
         /// Obtiene un usuario
         /// </summary>
         /// <param name="id">id del usuario</param>
         /// <returns>retorna el usuario solicitado</returns>
-        public Task<User> Get(int id);
+        public Task<ResponseUserDTO> Get(int id);
 
         /// <summary>
         /// Obtiene todos los usuarios

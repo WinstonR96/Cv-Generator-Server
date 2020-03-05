@@ -66,16 +66,15 @@ namespace Cv_Generator_Server.Controllers
         /// <param name="data">Informacion del nuevo usuario</param>
         /// <returns>Si es exitoso retorna el nuevo usuario, sino retorna el error</returns>
         [HttpPost]
-        public IActionResult Add([FromBody] User data)
+        public IActionResult Add([FromBody] UserAddDTO data)
         {
             if (data == null)
                 return BadRequest();
 
-            data.Password = Utils.GetSHA256(data.Password);
             try
             {
-                _userService.Add(data);
-                return CreatedAtAction(nameof(GetUser), new { id = data.UserId }, data);
+                var user = _userService.Add(data);
+                return CreatedAtAction(nameof(GetUser), new { id = user.UserId }, data);
             }catch(Exception ex)
             {
                 return Ok(new ResponseDTO()
