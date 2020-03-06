@@ -62,7 +62,7 @@ namespace Cv_Generator_Server.Services
         {
             try
             {
-                var data = _context.academics.Single(x => x.AcademicId == id);
+                var data = _context.academics.SingleOrDefault(x => x.AcademicId == id);
                 data.State = -1;
                 _context.Update(data);
                 _context.SaveChanges();

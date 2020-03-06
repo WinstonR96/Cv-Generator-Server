@@ -101,7 +101,7 @@
             <param name="id">Id del usuario a obtener</param>
             <returns>Retorna un usuario por el id especificado</returns>
         </member>
-        <member name="M:Cv_Generator_Server.Controllers.UserController.Add(Cv_Generator_Server.Models.User)">
+        <member name="M:Cv_Generator_Server.Controllers.UserController.Add(Cv_Generator_Server.Models.DTOs.Request.UserAddDTO)">
             <summary>
             Agregar nuevo usuario
             </summary>
@@ -345,7 +345,7 @@
             Interfaz de la clase UserService
             </summary>
         </member>
-        <member name="M:Cv_Generator_Server.Interfaces.IUserService.Add(Cv_Generator_Server.Models.User)">
+        <member name="M:Cv_Generator_Server.Interfaces.IUserService.Add(Cv_Generator_Server.Models.DTOs.Request.UserAddDTO)">
             <summary>
             Agrega un usuario
             </summary>
@@ -616,6 +616,26 @@
             password del usuario a loguear
             </summary>
         </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.UserAddDTO.Username">
+            <summary>
+            Username del usuario
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.UserAddDTO.Email">
+            <summary>
+            Email del usuario
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.UserAddDTO.Password">
+            <summary>
+            Password del usuario
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Request.UserAddDTO.Photo">
+            <summary>
+            Photo del usuario
+            </summary>
+        </member>
         <member name="T:Cv_Generator_Server.Models.DTOs.Request.UserPassDTO">
             <summary>
             DTO para el request de cambiar contraseña
@@ -704,6 +724,21 @@
         <member name="P:Cv_Generator_Server.Models.DTOs.Response.ResponseDTO.message">
             <summary>
             Mensaje
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Response.ResponseUserDTO.Username">
+            <summary>
+            Username del usuario
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Response.ResponseUserDTO.Email">
+            <summary>
+            Email del usuario
+            </summary>
+        </member>
+        <member name="P:Cv_Generator_Server.Models.DTOs.Response.ResponseUserDTO.Photo">
+            <summary>
+            Photo del usuario
             </summary>
         </member>
         <member name="T:Cv_Generator_Server.Models.Experience_Work">
@@ -1004,7 +1039,7 @@
             </summary>
             <returns>retorna un listado de usuarios</returns>
         </member>
-        <member name="M:Cv_Generator_Server.Services.UserService.Add(Cv_Generator_Server.Models.User)">
+        <member name="M:Cv_Generator_Server.Services.UserService.Add(Cv_Generator_Server.Models.DTOs.Request.UserAddDTO)">
             <summary>
             Agrega un usuario
             </summary>

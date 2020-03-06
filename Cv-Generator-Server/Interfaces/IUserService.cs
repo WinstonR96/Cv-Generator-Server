@@ -1,6 +1,7 @@
 ﻿using Cv_Generator_Server.Models;
 using Cv_Generator_Server.Models.DTOs;
 using Cv_Generator_Server.Models.DTOs.Request;
+using Cv_Generator_Server.Models.DTOs.Response;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -28,7 +29,7 @@ namespace Cv_Generator_Server.Interfaces
         /// Obtiene todos los usuarios
         /// </summary>
         /// <returns>retorna un listado de usuarios</returns>
-        public List<User> GetUsers();
+        public List<ResponseUserDTO> GetUsers();
 
         /// <summary>
         /// Actualiza un usuario

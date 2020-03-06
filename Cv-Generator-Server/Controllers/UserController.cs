@@ -43,7 +43,7 @@ namespace Cv_Generator_Server.Controllers
         /// </summary>
         /// <returns>retorna un listado de usuarios</returns>
         [HttpGet]
-        public ActionResult<List<User>> GetUsers()
+        public ActionResult<List<ResponseUserDTO>> GetUsers()
         {
             return _userService.GetUsers();
         }
@@ -54,10 +54,10 @@ namespace Cv_Generator_Server.Controllers
         /// <param name="id">Id del usuario a obtener</param>
         /// <returns>Retorna un usuario por el id especificado</returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<ResponseUserDTO>> GetUser(int id)
         {
             var user = await _userService.Get(id);
-            return user == null ? NotFound() : (ActionResult<User>)user;
+            return user == null ? NotFound() : (ActionResult<ResponseUserDTO>)user;
         }
 
         /// <summary>

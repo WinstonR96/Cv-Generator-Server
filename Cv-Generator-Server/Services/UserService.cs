@@ -2,6 +2,7 @@
 using Cv_Generator_Server.Interfaces;
 using Cv_Generator_Server.Models;
 using Cv_Generator_Server.Models.DTOs.Request;
+using Cv_Generator_Server.Models.DTOs.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,18 +31,35 @@ namespace Cv_Generator_Server.Services
         /// </summary>
         /// <param name="id">id del usuario</param>
         /// <returns>retorna el usuario solicitado</returns>
-        public async Task<User> Get(int id)
+        public async Task<ResponseUserDTO> Get(int id)
         {
-            return await _context.users.FindAsync(id);
+            var user = await _context.users.FindAsync(id);
+            return new ResponseUserDTO()
+            {
+                Email = user.Email,
+                Photo = user.Photo,
+                Username = user.Username
+            };
         }
 
         /// <summary>
         /// Obtiene todos los usuarios
         /// </summary>
         /// <returns>retorna un listado de usuarios</returns>
-        public List<User> GetUsers()
+        public List<ResponseUserDTO> GetUsers()
         {
-            return _context.users.Where(x => x.State == 1).ToList();
+            var users = _context.users.Where(x => x.State == 1).ToList();
+            List<ResponseUserDTO> usersResponse = new List<ResponseUserDTO>();
+            foreach(var user in users)
+            {
+                usersResponse.Add(new ResponseUserDTO()
+                {
+                    Username = user.Username,
+                    Photo = user.Photo,
+                    Email = user.Email
+                });
+            }
+            return usersResponse;
         }
 
         /// <summary>
@@ -50,7 +68,7 @@ namespace Cv_Generator_Server.Services
         /// <param name="user">informacion del usuario</param>
         public User Add(UserAddDTO user)
         {
-            var userOriginal = _context.users.Single(x => x.Email == user.Email || x.Username == user.Username);
+            var userOriginal = _context.users.SingleOrDefault(x => x.Email.Equals(user.Email) || x.Username.Equals(user.Username));
             if (userOriginal != null)
                 throw new Exception("El usuario ya existe");
 
@@ -76,7 +94,7 @@ namespace Cv_Generator_Server.Services
         {
             try
             {
-                var userOriginal = _context.users.Single(x => x.UserId == id);
+                var userOriginal = _context.users.SingleOrDefault(x => x.UserId == id);
                 userOriginal.State = -1;
                 _context.Update(userOriginal);
                 _context.SaveChanges();
@@ -93,7 +111,7 @@ namespace Cv_Generator_Server.Services
         /// <param name="data">informacion del usuario a actualizar</param>
         public void Update(UserPhotoDTO data)
         {
-            var userOriginal = _context.users.Single(x => x.UserId == data.UserId);
+            var userOriginal = _context.users.SingleOrDefault(x => x.UserId == data.UserId);
             userOriginal.Photo = data.Photo;
             _context.Update(userOriginal);
             _context.SaveChanges();
